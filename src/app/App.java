@@ -71,7 +71,8 @@ public class App {
         else
 
         {
-            System.out.println("\nSorry better luck next time");
+            System.out.println("\nThe word was " + secretWord);
+            System.out.println("\nYou Loose.. Sorry better luck next time");
         }
 
     }// end main
