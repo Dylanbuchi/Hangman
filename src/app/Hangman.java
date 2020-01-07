@@ -12,6 +12,8 @@ public class Hangman {
 
     // numbers of starting guesses
     private int guesses = 8;
+
+    // check if it's a win or not
     private boolean win = false;
 
     // empty constructor
