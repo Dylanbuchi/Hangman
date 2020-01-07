@@ -74,8 +74,6 @@ public class Hangman {
         for (int i = 0; i < game.length; i++) {
 
             if (secretWord.charAt(i) == userGuess) {
-                // Decrements the guesses by 1
-                guesses--;
 
                 game[i] = userGuess;
                 completed += userGuess;
@@ -92,9 +90,6 @@ public class Hangman {
         for (int i = 0; i < game.length; i++) {
 
             if (game[i] == userGuess) {
-                // increments the guesses by 1 to not loose if guessing the same letter already
-                // in the word
-                guesses++;
 
                 System.out.println("The Letter " + userGuess + " is already guessed");
                 break;
