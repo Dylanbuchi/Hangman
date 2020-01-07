@@ -47,7 +47,14 @@ public class App {
 
             }
 
-            System.out.println("\nYou have " + hangman.getGuesses() + " guesses left.");
+            // if guesses = 1 one left message
+            if (hangman.getGuesses() == 1) {
+                System.out.println("\nCarefull, you have only one guess left.");
+
+            } else {
+                System.out.println("\nYou have " + hangman.getGuesses() + " guesses left.");
+            }
+
             System.out.print("Your guess: ");
             // user plays
             String user = in.next().toUpperCase();

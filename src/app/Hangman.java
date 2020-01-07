@@ -51,7 +51,7 @@ public class Hangman {
         // check if it's a valid a character
         if (!userGuess.toString().matches("[a-zA-Z]")) {
 
-            System.err.println("Please enter a valid character from (A-Z)");
+            System.err.println("Please enter a valid character from (A-Z)\n");
             return;
 
         }
