@@ -82,6 +82,24 @@ public class Hangman {
 
         }
 
+        printCorrectGuess(game, userGuess, secretWord);
+    }
+
+    // helper method to print Correct! once letter found then break out loop to
+    // avoid multiples
+    // statements
+    public void printCorrectGuess(char[] game, Character userGuess, String secretWord) {
+        for (int i = 0; i < game.length; i++) {
+
+            if (secretWord.charAt(i) == userGuess) {
+
+                System.out.println("Correct!");
+                break;
+
+            }
+
+        }
+
     }
 
     // helper method to check if user inputs the same letter twice or more
