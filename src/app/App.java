@@ -26,7 +26,7 @@ public class App {
         // Create the game with Characters for the secret word
         char[] game = new char[secretWord.length()];
 
-        // print Game
+        // print Gamesss
         System.out.println("Welcome to Hangman!");
 
         // fill the game word with dashes
