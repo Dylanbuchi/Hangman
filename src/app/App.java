@@ -54,7 +54,7 @@ public class App {
 
             char userLetter = user.charAt(0);
 
-            hangman.isTheGuessCorrect(game, userLetter, secretWord);
+            hangman.findLetter(game, userLetter, secretWord);
             System.out.print("The word now looks like this: ");
             hangman.displayGame(game);
             System.out.println();

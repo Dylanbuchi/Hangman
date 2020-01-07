@@ -46,12 +46,25 @@ public class Hangman {
     }
 
     // helper method for guessing
-    public void isTheGuessCorrect(char[] game, Character userGuess, String secretWord) {
-        // Decrements the guesses by 1
-        guesses--;
+    public void findLetter(char[] game, Character userGuess, String secretWord) {
+
+        // check if it's a valid a character
+        if (!userGuess.toString().matches("[a-zA-Z]")) {
+
+            System.err.println("Please enter a valid character from (A-Z)");
+            return;
+
+        }
+
+        /// check if users input same letter
+        LetterIsAlreadyFound(game, userGuess, secretWord);
 
         // if user guess is wrong
         if (secretWord.indexOf(userGuess) == -1) {
+
+            // Decrements the guesses by 1
+            guesses--;
+
             System.out.println("The Letter " + userGuess + " is not in the word.");
 
         }
@@ -61,8 +74,30 @@ public class Hangman {
         for (int i = 0; i < game.length; i++) {
 
             if (secretWord.charAt(i) == userGuess) {
+                // Decrements the guesses by 1
+                guesses--;
+
                 game[i] = userGuess;
                 completed += userGuess;
+
+            }
+
+        }
+
+    }
+
+    // helper method to check if user inputs the same letter twice or more
+    public void LetterIsAlreadyFound(char[] game, Character userGuess, String secretWord) {
+
+        for (int i = 0; i < game.length; i++) {
+
+            if (game[i] == userGuess) {
+                // increments the guesses by 1 to not loose if guessing the same letter already
+                // in the word
+                guesses++;
+
+                System.out.println("The Letter " + userGuess + " is already guessed");
+                break;
 
             }
 
