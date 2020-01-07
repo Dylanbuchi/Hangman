@@ -1,6 +1,7 @@
 package app;
 
-import java.util.Arrays;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,20 +9,33 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) throws Exception {
+
+        // Create List of words to be chosen
+        List<String> listOfWords = new ArrayList<String>();
+
+        // Create Scanner object to read and go to the words.txt file
+        Scanner readFile = new Scanner(new File("src\\app\\words.txt"));
+
+        // loop to read the file and put the words into the list
+        while (readFile.hasNext()) {
+
+            String word = readFile.next().toUpperCase();
+
+            listOfWords.add(word);
+
+        }
+
         // Create game's object
         Hangman hangman = new Hangman(7);
 
         // new Scanner to read inputs
         Scanner in = new Scanner(System.in);
 
-        // Create List of words to be choosen
-        List<String> words = Arrays.asList("SALAD", "BREAD", "HOUSE", "BIIIIIIIIIIG", "BEER", "MONKEY", "PEPSI");
-
         // Create a random number from the size of the List
-        int randomNumber = new Random().nextInt(words.size());
+        int randomNumber = new Random().nextInt(listOfWords.size());
 
         // Create the secret word generated randomly from the List
-        String secretWord = words.get(randomNumber);
+        String secretWord = listOfWords.get(randomNumber);
 
         // Create the game with Characters for the secret word
         char[] game = new char[secretWord.length()];
@@ -80,8 +94,11 @@ public class App {
             System.out.println("\nYou lost.. Sorry better luck next time");
         }
 
-        // close scanner
+        // close scanner user input
         in.close();
+
+        // close Scanner File reader
+        readFile.close();
     }
 
 }
