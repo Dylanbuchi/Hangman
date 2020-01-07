@@ -80,6 +80,8 @@ public class App {
             System.out.println("\nYou lost.. Sorry better luck next time");
         }
 
+        // close scanner
+        in.close();
     }
 
 }
