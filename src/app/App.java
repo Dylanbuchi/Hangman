@@ -7,64 +7,70 @@ import java.util.Scanner;
 
 public class App {
 
-    // Scanner object for user inputs
-    static Scanner in = new Scanner(System.in);
-
-    // check if the word is completed
-    static String completed = "";
-
-    // user input
-    static String userGuess = "";
-
-    // numbers of starting guesses
-    static int guesses = 8;
-    static boolean win = false;
     // List of words for the game
-    static List<String> words = Arrays.asList("SALAD", "BREAD", "HOUSE", "BIIIIIIIIIIG", "BEER", "MONKEY", "PEPSI");
 
     // random number
-    static int randomNumber = new Random().nextInt(words.size());
 
     // get a random word from List
-    static String secretWord = words.get(randomNumber);
 
     // create the game
-    static char[] game = new char[secretWord.length()];
 
     public static void main(String[] args) throws Exception {
+        // Create game's object
+        Hangman hangman = new Hangman(7);
+
+        // new Scanner to read inputs
+        Scanner in = new Scanner(System.in);
+
+        // Create List of words to be choosen
+        List<String> words = Arrays.asList("SALAD", "BREAD", "HOUSE", "BIIIIIIIIIIG", "BEER", "MONKEY", "PEPSI");
+
+        // Create a random number from the size of the List
+        int randomNumber = new Random().nextInt(words.size());
+
+        // Create the secret word generated randomly from the List
+        String secretWord = words.get(randomNumber);
+
+        // Create the game with Characters for the secret word
+        char[] game = new char[secretWord.length()];
 
         // print Game
         System.out.println("Welcome to Hangman!");
 
-        // fill the word with dashes
-        fillGame(game);
+        // fill the game word with dashes
+        hangman.fillGame(game);
 
         // display the game
-        displayGame(game);
+        hangman.displayGame(game);
 
-        // Infinite loop for the game
+        // Infinite loop for the game to work
         while (true) {
-            isTheWordCompleted(game);
 
-            // exit game if win or loose
-            if (guesses == 0 || win == true) {
+            // check if the word is completed or not
+            hangman.isTheWordCompleted(game, secretWord);
+
+            // exit game if win or word completed
+            if (hangman.getGuesses() == 0 || hangman.isWin() == true) {
                 break;
 
             }
 
-            System.out.println("\nYou have " + guesses + " guesses left.");
+            System.out.println("\nYou have " + hangman.getGuesses() + " guesses left.");
             System.out.print("Your guess: ");
             // user plays
-            userGuess = in.next().toUpperCase();
-            isTheGuessCorrect(game);
+            String user = in.next().toUpperCase();
+
+            char userLetter = user.charAt(0);
+
+            hangman.isTheGuessCorrect(game, userLetter, secretWord);
             System.out.print("The word now looks like this: ");
-            displayGame(game);
+            hangman.displayGame(game);
             System.out.println();
 
         } // end while loop
 
         // end game
-        if (isTheWordCompleted(game)) {
+        if (hangman.isTheWordCompleted(game, secretWord)) {
             System.out.println("\nCongratulations you found the word!!");
         }
 
@@ -72,73 +78,7 @@ public class App {
 
         {
             System.out.println("\nThe word was " + secretWord);
-            System.out.println("\nYou Loose.. Sorry better luck next time");
-        }
-
-    }// end main
-
-    // display the game
-    public static void displayGame(char[] game) {
-
-        for (int i = 0; i < game.length; i++) {
-            System.out.print(game[i]);
-
-        }
-
-    }
-
-    // fill game
-    public static void fillGame(char[] game) {
-
-        for (int i = 0; i < game.length; i++) {
-            Arrays.fill(game, '-');
-
-        }
-
-    }
-
-    // check if word is found<
-    public static boolean isTheWordCompleted(char[] game) {
-        String result = "";
-
-        for (char c : game) {
-            result += c;
-
-        }
-
-        if (result.equals(secretWord)) {
-            win = true;
-            return true;
-
-        }
-
-        return false;
-
-    }
-
-    // helper method for guessing
-    public static void isTheGuessCorrect(char[] game) {
-        // Decrements the guesses by 1
-        guesses--;
-        // convert the String into a Char
-        char c = userGuess.charAt(0);
-
-        // if user guess is wrong
-        if (secretWord.indexOf(c) == -1) {
-            System.out.println("The Letter " + c + " is not in the word.");
-
-        }
-
-        // Loop into each Char of the secret word and if the user enters the correct
-        // Char replace it
-        for (int i = 0; i < game.length; i++) {
-
-            if (secretWord.charAt(i) == c) {
-                game[i] = c;
-                completed += c;
-
-            }
-
+            System.out.println("\nYou lost.. Sorry better luck next time");
         }
 
     }
