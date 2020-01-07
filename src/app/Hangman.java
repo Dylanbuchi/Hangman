@@ -1,7 +1,6 @@
 package app;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * Hangman
@@ -48,7 +47,6 @@ public class Hangman {
     public void isTheGuessCorrect(char[] game, Character userGuess, String secretWord) {
         // Decrements the guesses by 1
         guesses--;
-        // convert the String into a Char
 
         // if user guess is wrong
         if (secretWord.indexOf(userGuess) == -1) {

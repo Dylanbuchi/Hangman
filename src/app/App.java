@@ -7,14 +7,6 @@ import java.util.Scanner;
 
 public class App {
 
-    // List of words for the game
-
-    // random number
-
-    // get a random word from List
-
-    // create the game
-
     public static void main(String[] args) throws Exception {
         // Create game's object
         Hangman hangman = new Hangman(7);
